@@ -1,0 +1,1 @@
+{"version":1,"contracts":[{"id":"vnsfd9kf9sa0e","package_name":"cairo","contract_name":"Review","module_path":"cairo::Review::Review","artifacts":{"sierra":"cairo_Review.contract_class.json","casm":null}}]}
