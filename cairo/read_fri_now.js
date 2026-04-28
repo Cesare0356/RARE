@@ -10,7 +10,7 @@ const main = async () => {
 
   const gp = block.l2_gas_price;
   if (!gp) {
-    console.log("Questo nodo non espone gas_prices, serve fallback con estimateFee.");
+    console.log("fallback with estimateFee.");
     return;
   }
 
