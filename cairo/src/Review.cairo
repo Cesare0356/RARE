@@ -108,7 +108,7 @@ mod Review {
                 let mut buf: Array<felt252> = array![];
                 resnorev.serialize(ref buf);
 
-                // self.is_authorized.write(user_address, false);
+                self.is_authorized.write(user_address, false);
 
                 send_message_to_l1_syscall(to_address.into(), buf.span()).unwrap_syscall();
                 return;

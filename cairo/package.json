@@ -13,7 +13,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "dotenv": "^17.2.1",
+    "dotenv": "^17.4.2",
     "ethers": "^6.15.0",
     "starknet": "^7.6.4"
   }

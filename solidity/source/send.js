@@ -39,7 +39,7 @@ const isFelt = (hex) => {
   // ---- Required environment variables ----
   const SEPOLIA_RPC_URL = getEnv("SEPOLIA_RPC_URL");              // EVM Sepolia RPC
   const SEPOLIA_PRIVATE_KEY = getEnv("SEPOLIA_PRIVATE_KEY");      // EVM private key
-  const CONTRACTMSG_ADDRESS = normHex(getEnv("CONTRACTMSG_ADDRESS")); // L1 gateway contract
+  const CONTRACTMSG_ADDRESS = ethers.getAddress(getEnv("CONTRACTMSG_ADDRESS")); // L1 gateway contract
   const L2_CONTRACT_ADDRESS = normHex(getEnv("L2_CONTRACT_ADDRESS")); // Cairo contract address as felt
   const STARKNET_SELECTOR = normHex(getEnv("STARKNET_SELECTOR"));     // L2 entry point selector as felt
   const STARKNET_RPC_URL = getEnv("STARKNET_RPC_URL");            // Starknet Sepolia RPC
