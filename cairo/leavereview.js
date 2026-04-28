@@ -12,7 +12,7 @@ const contractMsgL1     = process.env.CONTRACTMSG_ADDRESS;        // indirizzo L
 const userEvmAddress    = process.env.USER_EVM_ADDRESS;           // utente autorizzato dall'l1_handler (EthAddress)
 
 if (!STARKNET_RPC_URL || !accountAddress || !privateKey || !contractAddress || !contractMsgL1 || !userEvmAddress) {
-  throw new Error("Manca qualche variabile nel .env (serve: STARKNET_RPC_URL, STARKNET_ACCOUNT_ADDRESS, PRIVATE_KEY, L2_CONTRACT_ADDRESS, CONTRACTMSG_ADDRESS, USER_EVM_ADDRESS)");
+  throw new Error("Missing variables in .env (serve: STARKNET_RPC_URL, STARKNET_ACCOUNT_ADDRESS, PRIVATE_KEY, L2_CONTRACT_ADDRESS, CONTRACTMSG_ADDRESS, USER_EVM_ADDRESS)");
 }
 
 // helpers

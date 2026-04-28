@@ -21,7 +21,6 @@ mod Review {
     use starknet::event::EventEmitter;
     use super::{IRestaurantReview, MyData};
     use starknet::{EthAddress, SyscallResultTrait};
-    use core::num::traits::Zero;
     use starknet::syscalls::send_message_to_l1_syscall;
     use starknet::storage::{
         Map, StoragePathEntry, StoragePointerReadAccess, StoragePointerWriteAccess,

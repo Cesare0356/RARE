@@ -1,7 +1,7 @@
 {
   "name": "cairo",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "leavereview.js",
   "directories": {
     "test": "tests"
   },

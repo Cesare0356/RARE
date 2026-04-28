@@ -4,10 +4,10 @@ pragma solidity ^0.8.28;
 contract L1Review {
     struct ReviewData {
         uint8 rating;   // 1..5
-        bytes review;   // testo/bytes grezzi (in storage)
+        bytes review;   // raw text/bytes (stored in storage)
     }
 
-    /// @dev Modalità unique: una entry per ciascun key calcolato.
+    /// @dev Unique mode: one entry per computed key.
     mapping(bytes32 => ReviewData) public revByKey;
 
     event ReviewStoredUnique(
@@ -18,37 +18,37 @@ contract L1Review {
         uint256 len
     );
 
-    /// @notice Scrive sempre in uno slot nuovo (chiave = keccak(user_address, to_address, nonce)).
-    /// @dev Valida input e poi salva in storage.
+    /// @notice Always writes to a new slot (key = keccak(user_address, to_address, nonce)).
+    /// @dev Validates input and then saves to storage.
     function leave_review_unique(
         address user_address,
         address to_address,
         uint256 nonce,
-        uint8 rating,          // tipizzato stretto
+        uint8 rating,          // strictly typed
         string calldata text
     ) external {
-        // --- validazioni ---
-        // rating tra 1 e 5
+        // --- validations ---
+        // rating between 1 and 5
         require(rating >= 1 && rating <= 5, "rating out of range [1..5]");
 
-        // lunghezza massima 512
+        // maximum length 1024
         bytes memory b = bytes(text);
         uint256 len = b.length;
         require(len <= 1024, "text too long (>1024)");
 
-        // caratteri ASCII stampabili: 32..126
-        // (consente stringa vuota)
+        // printable ASCII characters: 32..126
+        // (empty string allowed)
         for (uint256 i = 0; i < len; ) {
             uint8 c = uint8(b[i]);
             require(c >= 32 && c <= 126, "non-printable ASCII char");
             unchecked { ++i; }
         }
 
-        // --- chiave unica per evitare overwrite (nuovi slot in storage) ---
+        // --- unique key to avoid overwrite (new storage slots) ---
         bytes32 key = keccak256(abi.encode(user_address, to_address, nonce));
 
-        // --- scrittura in STORAGE ---
-        // Assegno la struct: rating e bytes vanno in storage (len slot + ceil(len/32) slot dati)
+        // --- write to STORAGE ---
+        // Assign struct: rating and bytes go into storage (length slot + ceil(len/32) data slots)
         revByKey[key] = ReviewData({
             rating: rating,
             review: b
@@ -63,7 +63,7 @@ contract L1Review {
         returns (uint8 rating, string memory text, bool exists)
     {
         ReviewData storage d = revByKey[key];
-        // Poiche' rating valido e' [1..5], possiamo usare rating==0 come "non esiste".
+        // Since valid rating is [1..5], we can use rating == 0 as "does not exist".
         if (d.rating == 0) {
             return (0, "", false);
         }
